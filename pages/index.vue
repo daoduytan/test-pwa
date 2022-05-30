@@ -1,7 +1,6 @@
 <template>
   <div>
     <Tutorial />
-
     <button @click="thisClick">s</button>
   </div>
 </template>
@@ -22,6 +21,18 @@ export default {
       this.test = e;
     },
     thisClick() {
+      this.test.prompt();
+
+      // Wait for the user to respond to the prompt
+      this.test.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the A2HS prompt");
+        } else {
+          console.log("User dismissed the A2HS prompt");
+        }
+        this.test = null;
+      });
+
       console.log("dsala", this.test);
     },
   },
